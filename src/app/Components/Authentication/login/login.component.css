@@ -1,0 +1,33 @@
+.img-fluid 
+{
+ max-width: 60%;
+ height: auto;
+}
+.main
+{
+ padding-top: 3%;
+}
+.maincol-4
+{
+ padding-left:35px;
+ padding-right:35px;
+ margin-top: 10%;
+}
+.pcls
+{
+ font-weight: 50;
+ line-height: 1.5;
+ color: #a3acbb;
+}
+.data-icon-card-primary {
+    background: #0F2F87;
+    color: #ffffff;
+}
+@media only screen and (max-width: 480px) {
+.maincol-4
+{
+ padding-left:35px;
+ padding-right:35px;
+ margin-top: 0%;
+}
+}

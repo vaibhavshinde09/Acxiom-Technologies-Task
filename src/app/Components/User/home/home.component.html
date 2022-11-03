@@ -1,0 +1,114 @@
+<app-navbar></app-navbar>
+<div class="col-md-12 rowcls">
+<div class="parent rowcls">
+<div>
+    <h4 class="card-title" style="color: #001172;">User Details</h4>
+</div>
+<div style="float:right">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#UserModel">Add User</button>&nbsp;
+<button type="button" class="btn btn-secondary" (click)="DownloadReport()">Download</button>
+</div>
+</div>
+<div class="table-responsive" >
+    <table class="table table-bordered table-striped" #MAIN>
+        <thead class="thead-dark" style="color: #001172;">
+            <tr>
+            <th scope="col" style="white-space: nowrap;">Sr.No </th>
+            <th scope="col" style="white-space: nowrap;">Photo</th>
+            <th scope="col" style="white-space: nowrap;">Name</th>
+            <th scope="col"  style="white-space: nowrap;">Mobile No.</th>
+            <th scope="col" style="white-space: nowrap;">Address</th>
+            <th scope="col" style="white-space: nowrap;">Skills</th>
+            <th scope="col" style="white-space: nowrap;">Hobbies</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="getuserData.length!=0">
+            <tr *ngFor="let res of getuserData;index as i">
+            <td scope="row">{{i+1}}</td>
+            <td ><img [src]="getSafeUrl(res.photo)" class="rounded" style="height:23px;"></td>
+            <td ><b>{{res.name}}</b></td>
+            <td><b>{{res.mobileno}}</b></td>
+            <td><b>{{res.address}}</b></td>
+            <td><b>{{res.skills}}</b></td>
+            <td><b>{{res.hobbies}}</b></td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="getuserData.length==0">
+            <tr class="text-center">
+            <td colspan="7" class="text-center">No Data Found </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+   <!-- Add User Model -->
+   <div class="modal fade" id="UserModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="Adduser" (ngSubmit)="OnSubmit()">
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Name:</label>
+              <input formControlName="name" autocomplete="off" type="text" class="form-control" id="recipient-name">
+              <div style="color: red;" *ngIf="(f.name.touched || f.name.dirty) && f.name.errors">
+              <div *ngIf="f.name.errors.required">Name is required</div>
+             </div> 
+            </div>
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Mobile No:</label>
+            <input formControlName="mobileno" autocomplete="off" type="text" class="form-control" id="recipient-name">
+            <div style="color: red;" *ngIf="(f.mobileno.touched || f.mobileno.dirty) && f.mobileno.errors">
+            <div *ngIf="f.mobileno.errors.required">Mobile No is required</div>
+            </div>
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Address:</label>
+              <textarea formControlName="address" class="form-control" id="message-text"></textarea>
+              <div style="color: red;" *ngIf="(f.address.touched || f.address.dirty) && f.address.errors">
+              <div *ngIf="f.address.errors.required">Address is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Skills:</label>
+            <input formControlName="skills" autocomplete="off" type="text" class="form-control" id="Skills">
+            <div style="color: red;" *ngIf="(f.skills.touched || f.skills.dirty) && f.skills.errors">
+            <div *ngIf="f.skills.errors.required">Skills is required</div>
+            </div>
+            </div>
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Hobbies:</label>
+            <input formControlName="hobbies" autocomplete="off" type="text" class="form-control" id="recipient-name">
+            <div style="color: red;" *ngIf="(f.hobbies.touched || f.hobbies.dirty) && f.hobbies.errors">
+            <div *ngIf="f.hobbies.errors.required">Hobbies is required</div>
+            </div>
+            </div>
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Hobbies:</label>
+            <div class="input-group mb-3">
+            <div class="custom-file">
+            <input  (change)="showPreview($event)" formControlName="photo" type="file" class="custom-file-input" id="inputGroupFile01">
+            <label class="custom-file-label" for="inputGroupFile01">{{imageURL=='' ? 'Choose file':filepath?.name}}</label>
+            </div>
+             </div>
+             <div style="color: red;margin-top:-10px;" *ngIf="(f.photo.touched || f.photo.dirty) && f.photo.errors">
+             <div *ngIf="f.photo.errors.required">photo is required</div>
+            </div>
+            <div style="color: red;margin-top:-10px;"*ngIf="ImageFormatFlag==false">File type must be png, jpg, jpeg or pdf</div>
+            </div>
+           <!-- <img [src]="imageURL" class="img-fluid"> -->
+            <div class="modal-footer">
+                <button [disabled]="Adduser.invalid" type="submit" class="btn btn-primary">Add</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>

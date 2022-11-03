@@ -1,0 +1,61 @@
+<div class="col-md-12">
+    <div class="row vh-100">
+        <div class="col-md-8">
+            <div class="main">
+                <div class="row justify-content-center align-items-center">
+                    <img src="assets/img/login-v1.svg" class="img-fluid" alt="Responsive image" />
+                </div><br/>
+                <div class="row justify-content-center align-items-center">
+                <h1 style="color:#083DCC;font-family: sans-serif;font-weight: lighter;">
+                Acxiom Technologies
+               </h1>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-4 data-icon-card-primary">
+            <div class="d-flex flex-column py-5 justify-content-center maincol-4">
+                <h2>Hello ! Welcome back.</h2>
+                <p class="pcls">Log in with your data that you entered during Your registration.</p>
+                <form class="auth-form" [formGroup]="login" (ngSubmit)="doLogin()">
+                    <div class="form-group">
+                    <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </span>
+                    </div>
+                    <input  formControlName="username" autocomplete="off" class="form-control" placeholder="Email" id="loginEmail" name="loginEmail" type="email" autofocus />
+                    </div>
+                    <div style="margin-bottom: 1rem;color: red;" *ngIf="(f.username.touched || f.username.dirty) && f.username.errors">
+                    <div style="margin-top: -4%;" *ngIf="f.username.errors.required">Email is required</div>
+                    </div> 
+                    </div>
+                    <div class="form-group">
+                    <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                    <i class="fa fa-key" aria-hidden="true"></i>
+                    </span>
+                    </div>
+                    <input  formControlName="password" [type]="type==true ?'password':'text'" formControlName="password" class="form-control" placeholder="Password"  autofocus autocomplete="off"/>
+                    <div class="input-group-append">
+                    <span class="input-group-text">
+                    <i (click)="changepasstype()" [ngClass]="type==true ?'fa fa-eye-slash':'fa fa-eye'" aria-hidden="true"></i>
+                    </span>
+                    </div>
+                    </div>
+                    </div>
+                    <span style="color: red;" *ngIf="(f.password.touched || f.password.dirty) && f.password.errors">
+                    <div style="margin-top: -4%;" *ngIf="f.password.errors.required">Password is required</div>
+                    <div style="margin-top: -4%;" *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                    <div style="margin-top: -4%;" *ngIf="f.password.errors.maxlength">Password must not exceed 40 characters</div>
+                    </span>
+                    <p class="text-right"><a href="" style="color:#f8f9fa;" routerLink="/forget-password">Forgot password ?</a></p>
+                    <button [disabled]="login.invalid" type="submit" style="font-size:100%;background-color: #5E89FF;color:#f8f9fa;"  class="btn btn-primary btn-lg btn-block mb-3">Login</button>
+                    <button  (click)="Reset()" type="submit" style="font-size:100%;background-color: #007bff;color:#f8f9fa;"  class="btn btn-primary btn-lg btn-block mb-3">Clear</button>
+                </form>
+               
+            </div>
+        </div>
+    </div>
+</div>
